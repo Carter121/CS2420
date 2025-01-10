@@ -29,4 +29,43 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <!--                    Ignore simple errors like "no main description" and "no module description", and "unknown tag" -->
+                    <doclint>all,-missing</doclint>
+                    <!--                    Edit target foldr -->
+                    <outputDirectory>${project.build.directory}/site/</outputDirectory>
+
+                    <tags>
+                        <tag>
+                            <name>author</name>
+                            <placement>a</placement>
+                            <head>Author:</head>
+                        </tag>
+                        <tag>
+                            <name>version</name>
+                            <placement>a</placement>
+                            <head>Version:</head>
+                        </tag>
+                        <tag>
+                            <name>course</name>
+                            <placement>a</placement>
+                            <head>Course:</head>
+                        </tag>
+                    </tags>
+
+                    <stylesheetfile>./betterjdocs.css</stylesheetfile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
