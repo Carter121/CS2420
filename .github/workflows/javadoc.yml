@@ -20,7 +20,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
-          java-version: 22
+          java-version: 23
           project: maven
       - name: Tidy up the javadocs
         uses: cicirello/javadoc-cleanup@v1
