@@ -1,8 +1,6 @@
 package assign02;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * This class represents a record of patients that have visited a UHealth
@@ -46,7 +44,7 @@ public class FacilityGeneric<Type> {
             list.set(minIndex, temp);
         }
     }
-    
+
     /**
      * Adds the given patient to the list of patients, avoiding duplicates.
      *
@@ -79,10 +77,13 @@ public class FacilityGeneric<Type> {
      * exists in the record
      */
     public CurrentPatientGeneric<Type> lookupByUHID(UHealthID patientID) {
-        for (CurrentPatientGeneric<Type> pt : this.patientList) {
-            if (pt.getUHealthID() == patientID)
-                return pt;
+        for (int i = 0; i < this.patientList.size(); i++) {
+            CurrentPatientGeneric<Type> pt = this.patientList.get(i);
+            if (pt.getUHealthID().equals(patientID)) {
+                return this.patientList.get(i);
+            }
         }
+
         return null;
     }
     /**
@@ -95,10 +96,12 @@ public class FacilityGeneric<Type> {
      */
     public ArrayList<CurrentPatientGeneric<Type>> lookupByPhysician(Type physician) {
         ArrayList<CurrentPatientGeneric<Type>> patients = new ArrayList<>();
-        for (CurrentPatientGeneric<Type> pt : this.patientList) {
-            if (pt.getPhysician()
-                  .equals(physician))
-                patients.add(pt);
+
+        for (int i = 0; i < this.patientList.size(); i++) {
+            CurrentPatientGeneric<Type> pt = this.patientList.get(i);
+            if (pt.getPhysician().equals(physician)) {
+                patients.add(this.patientList.get(i));
+            }
         }
 
         return patients;
@@ -134,15 +137,15 @@ public class FacilityGeneric<Type> {
      * or an empty list if no patients exist in the record
      */
     public ArrayList<Type> getPhysicianList() {
-        ArrayList<Type> physicians = new ArrayList<>();
+        Set<Type> physicians = new HashSet<>();
+
         for (CurrentPatientGeneric<Type> pt : this.patientList) {
             Type currentPhysician = pt.getPhysician();
-            if (physicians.contains(currentPhysician))
-                continue;
+
             physicians.add(currentPhysician);
         }
 
-        return physicians;
+        return new ArrayList<>(physicians);
     }
     /**
      * Sets the physician of a patient with the given UHealthID.
@@ -155,7 +158,7 @@ public class FacilityGeneric<Type> {
      */
     public void setPhysician(UHealthID patientID, Type physician) {
         for (CurrentPatientGeneric<Type> pt : this.patientList) {
-            if (pt.getUHealthID() == patientID)
+            if (pt.getUHealthID().equals(patientID))
                 pt.updatePhysician(physician);
         }
     }
@@ -171,7 +174,7 @@ public class FacilityGeneric<Type> {
      */
     public void setLastVisit(UHealthID patientID, GregorianCalendar date) {
         for (CurrentPatientGeneric<Type> pt : this.patientList) {
-            if (pt.getUHealthID() == patientID)
+            if (pt.getUHealthID().equals(patientID))
                 pt.updateLastVisit(date);
         }
     }
@@ -183,12 +186,10 @@ public class FacilityGeneric<Type> {
      * @return an ordered list of all patients in this facility
      */
     public ArrayList<CurrentPatientGeneric<Type>> getOrderedPatients(Comparator<CurrentPatientGeneric<Type>> cmp) {
-        ArrayList<CurrentPatientGeneric<Type>> patientListCopy = new ArrayList<CurrentPatientGeneric<Type>>();
-        for (CurrentPatientGeneric<Type> patient : this.patientList) {
-            //noinspection UseBulkOperation
-            patientListCopy.add(patient);
-        }
+        ArrayList<CurrentPatientGeneric<Type>> patientListCopy = new ArrayList<>(this.patientList);
+
         sort(patientListCopy, cmp);
+
         return patientListCopy;
     }
 

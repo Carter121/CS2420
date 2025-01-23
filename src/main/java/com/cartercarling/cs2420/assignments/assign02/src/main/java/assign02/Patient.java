@@ -65,7 +65,7 @@ public class Patient {
         if (!(other instanceof Patient pt))
             return false;
 
-        return this.uHealthID == pt.uHealthID;
+        return this.uHealthID.equals(pt.uHealthID);
     }
 
     /**

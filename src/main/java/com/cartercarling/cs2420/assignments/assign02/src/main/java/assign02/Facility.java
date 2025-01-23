@@ -57,11 +57,14 @@ public class Facility {
      * exists in the record
      */
     public CurrentPatient lookupByUHID(UHealthID patientID) {
-        for (CurrentPatient pt : this.patientList) {
-            if (pt.getUHealthID()
-                  .equals(patientID))
-                return pt;
+
+        for (int i = 0; i < this.patientList.size(); i++) {
+            CurrentPatient pt = this.patientList.get(i);
+            if (pt.getUHealthID().equals(patientID)) {
+                return this.patientList.get(i);
+            }
         }
+
         return null;
     }
 
@@ -75,9 +78,12 @@ public class Facility {
      */
     public ArrayList<CurrentPatient> lookupByPhysician(int physician) {
         ArrayList<CurrentPatient> patients = new ArrayList<>();
-        for (CurrentPatient pt : this.patientList) {
-            if (pt.getPhysician() == physician)
-                patients.add(pt);
+
+        for (int i = 0; i < this.patientList.size(); i++) {
+            CurrentPatient pt = this.patientList.get(i);
+            if (pt.getPhysician() == physician) {
+                patients.add(this.patientList.get(i));
+            }
         }
 
         return patients;
@@ -123,11 +129,7 @@ public class Facility {
             physicians.add(currentPhysician);
         }
 
-        ArrayList<Integer> physicianList = new ArrayList<>(physicians);
-
-        physicianList.addAll(physicians);
-
-        return physicianList;
+        return new ArrayList<>(physicians);
     }
 
     /**
@@ -141,7 +143,7 @@ public class Facility {
      */
     public void setPhysician(UHealthID patientID, int physician) {
         for (CurrentPatient pt : this.patientList) {
-            if (pt.getUHealthID() == patientID)
+            if (pt.getUHealthID().equals(patientID))
                 pt.updatePhysician(physician);
         }
     }
@@ -157,7 +159,7 @@ public class Facility {
      */
     public void setLastVisit(UHealthID patientID, GregorianCalendar date) {
         for (CurrentPatient pt : this.patientList) {
-            if (pt.getUHealthID() == patientID)
+            if (pt.getUHealthID().equals(patientID))
                 pt.updateLastVisit(date);
         }
     }
