@@ -38,9 +38,9 @@ public class UHealthID {
             }
         }
 
-        prefix = uHID.substring(0, 4)
-                     .toUpperCase();
-        suffix = uHID.substring(4, 8);
+        this.prefix = uHID.substring(0, 4)
+                          .toUpperCase();
+        this.suffix = uHID.substring(4, 8);
     }
 
     /**
@@ -65,7 +65,7 @@ public class UHealthID {
      * @return a textual representation of this UHealth ID
      */
     public String toString() {
-        return prefix + "-" + suffix;
+        return this.prefix + "-" + this.suffix;
     }
 
 }

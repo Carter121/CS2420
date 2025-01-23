@@ -19,7 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author CS 2420 course staff, Carter Carling, and Nathan Montoya
  * @version 01/16/2025
  */
+@SuppressWarnings({ "NewClassNamingConvention", "MagicConstant", "FieldCanBeLocal", "DataFlowIssue", "ConstantValue" })
 public class FacilityTester {
+
+    private final boolean LOCAL_MACHINE = false;
 
     private Facility emptyFacility, verySmallFacility, smallFacility;
     private UHealthID uHID1, uHID2, uHID3, uHID4, uHID5, uHID6, uHID7, uHID8, uHID9, uHID10;
@@ -69,7 +72,7 @@ public class FacilityTester {
         String absolutePath = "/home/carter/Dev/CS2420/src/main/java/com/cartercarling/cs2420/assignments/assign02/src/main/java/assign02/small_patient_list.txt";
         String defaultPath = "src/assign02/small_patient_list.txt";
 
-        String path = absolutePath;
+        String path = this.LOCAL_MACHINE ? absolutePath : defaultPath;
         this.smallFacility.addAll(this.readFromFile(path));
     }
 

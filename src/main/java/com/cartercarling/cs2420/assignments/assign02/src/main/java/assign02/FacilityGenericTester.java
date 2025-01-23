@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author CS 2420 course staff and, Carter Carling, and Nathan Montoya
  * @version 01/16/2024
  */
-@SuppressWarnings("MagicConstant")
+@SuppressWarnings({ "MagicConstant", "EqualsWithItself", "NewClassNamingConvention", "FieldCanBeLocal" })
 public class FacilityGenericTester {
 
     private FacilityGeneric<Integer> uIDFacility, emptyFacility, phase3Facility;
@@ -30,12 +30,12 @@ public class FacilityGenericTester {
     private GregorianCalendar p3date1, p3date2, p3date3, p3date4;
 
     // For BigFacility
-    private FacilityGeneric<Integer> uIDBigFacility, emptyBigFacility, bigFacility;
+    private FacilityGeneric<Integer> uIDBigFacility, bigFacility;
     private FacilityGeneric<UHealthID> uHIDBigFacility;
     private FacilityGeneric<String> nameBigFacility;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
 
         //***********************************************************************
         //* Original Test Stuff
@@ -91,7 +91,6 @@ public class FacilityGenericTester {
         this.uIDBigFacility = new FacilityGeneric<Integer>();
         this.uHIDBigFacility = new FacilityGeneric<UHealthID>();
         this.nameBigFacility = new FacilityGeneric<String>();
-        this.emptyBigFacility = new FacilityGeneric<Integer>();
         this.bigFacility = new FacilityGeneric<Integer>();
 
         //* Create the patient data
@@ -176,8 +175,7 @@ public class FacilityGenericTester {
         int expectedPhysician = 1234568;
         CurrentPatientGeneric<Integer> expectedPatient = new CurrentPatientGeneric<>(this.uIDFirstNames[1], this.uIDLastNames[1], new UHealthID(this.uHIDs[1].toString()), expectedPhysician, this.dates[1]);
         ArrayList<CurrentPatientGeneric<Integer>> actualPatients = this.uIDFacility.lookupByPhysician(expectedPhysician);
-        assertEquals(expectedPatient.toString(), actualPatients.get(0)
-                                                               .toString());
+        assertEquals(expectedPatient.toString(), actualPatients.getFirst().toString());
     }
 
     @Test
