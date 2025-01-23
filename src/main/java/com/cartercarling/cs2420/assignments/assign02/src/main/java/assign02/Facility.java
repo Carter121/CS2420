@@ -2,6 +2,8 @@ package assign02;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class represents a record of patients that have visited a UHealth
@@ -18,7 +20,7 @@ public class Facility {
      * Creates an empty facility record.
      */
     public Facility() {
-        this.patientList = new ArrayList<CurrentPatient>();
+        this.patientList = new ArrayList<>();
     }
 
     /**
@@ -113,15 +115,19 @@ public class Facility {
      * or an empty list if no patients exist in the record
      */
     public ArrayList<Integer> getPhysicianList() {
-        ArrayList<Integer> physicians = new ArrayList<>();
+        Set<Integer> physicians = new HashSet<>();
+
         for (CurrentPatient pt : this.patientList) {
             int currentPhysician = pt.getPhysician();
-            if (physicians.contains(currentPhysician))
-                continue;
+
             physicians.add(currentPhysician);
         }
 
-        return physicians;
+        ArrayList<Integer> physicianList = new ArrayList<>(physicians);
+
+        physicianList.addAll(physicians);
+
+        return physicianList;
     }
 
     /**

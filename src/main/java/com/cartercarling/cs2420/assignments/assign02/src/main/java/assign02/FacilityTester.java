@@ -22,19 +22,29 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FacilityTester {
 
     private Facility emptyFacility, verySmallFacility, smallFacility;
-    private UHealthID uHID1, uHID2, uHID3;
-    private GregorianCalendar date1, date2, date3;
+    private UHealthID uHID1, uHID2, uHID3, uHID4, uHID5, uHID6, uHID7, uHID8, uHID9, uHID10;
+    private GregorianCalendar date1, date2, date3, date4, date5;
 
+    private CurrentPatient[] smallFacilityPatients;
     @BeforeEach
     public void setUp() throws Exception {
 
         this.uHID1 = new UHealthID("AAAA-1111");
         this.uHID2 = new UHealthID("BCBC-2323");
         this.uHID3 = new UHealthID("HRHR-7654");
+        this.uHID4 = new UHealthID("JKLJ-1234");
+        this.uHID5 = new UHealthID("MNOP-4321");
+        this.uHID6 = new UHealthID("QRST-3456");
+        this.uHID7 = new UHealthID("UVWX-7890");
+        this.uHID8 = new UHealthID("YZAB-0987");
+        this.uHID9 = new UHealthID("CDEF-6543");
+        this.uHID10 = new UHealthID("GHIJ-9876");
 
         this.date1 = new GregorianCalendar(2023, 0, 1);
         this.date2 = new GregorianCalendar(2023, 3, 17);
         this.date3 = new GregorianCalendar(2022, 8, 21);
+        this.date4 = new GregorianCalendar(2021, 11, 5);
+        this.date5 = new GregorianCalendar(2020, 1, 4);
 
         this.emptyFacility = new Facility();
 
@@ -44,14 +54,23 @@ public class FacilityTester {
         this.verySmallFacility.addPatient(new CurrentPatient("Riley", "Nguyen", this.uHID3, 9879876, this.date3));
 
         this.smallFacility = new Facility();
+        this.smallFacility.addPatient(new CurrentPatient("Blake", "Bird", this.uHID1, 1010101, this.date1));
+        this.smallFacility.addPatient(new CurrentPatient("Samantha", "Schooner", this.uHID2, 3232323, this.date2));
+        this.smallFacility.addPatient(new CurrentPatient("John", "Fuller", this.uHID3, 9879876, this.date3));
+        this.smallFacility.addPatient(new CurrentPatient("Mia", "Nakamoto", this.uHID4, 9879876, this.date4));
+        this.smallFacility.addPatient(new CurrentPatient("Amy", "Gilmer", this.uHID5, 9879876, this.date5));
+        this.smallFacility.addPatient(new CurrentPatient("Kennedy", "Miller", this.uHID6, 9879876, this.date5));
+        this.smallFacility.addPatient(new CurrentPatient("Taylor", "Miller", this.uHID7, 9879876, this.date5));
+        this.smallFacility.addPatient(new CurrentPatient("Jin", "Young", this.uHID8, 9879876, this.date5));
+        this.smallFacility.addPatient(new CurrentPatient("Jordan", "Jones", this.uHID9, 9879876, this.date5));
+        this.smallFacility.addPatient(new CurrentPatient("Abdul", "Alcada", this.uHID10, 9879876, this.date5));
+
+
         String absolutePath = "/home/carter/Dev/CS2420/src/main/java/com/cartercarling/cs2420/assignments/assign02/src/main/java/assign02/small_patient_list.txt";
         String defaultPath = "src/assign02/small_patient_list.txt";
-        this.smallFacility.addAll(this.readFromFile(absolutePath));
 
-        // Extend this tester to add more tests for the facilities above,
-        // as well as to create and test larger facilities.
-        // (HINT: For a larger facility, use the helpers at the end of this file to
-        //        generate names, IDs, and dates.)
+        String path = absolutePath;
+        this.smallFacility.addAll(this.readFromFile(path));
     }
 
     // Empty Facility tests --------------------------------------------------------
@@ -104,7 +123,7 @@ public class FacilityTester {
     public void testVerySmallLookupPhysicianPatient() {
         Patient expectedPatient = new Patient("Riley", "Nguyen", new UHealthID("HRHR-7654"));
         ArrayList<CurrentPatient> actualPatients = this.verySmallFacility.lookupByPhysician(9879876);
-        assertEquals(expectedPatient.toString(), actualPatients.get(0)
+        assertEquals(expectedPatient.toString(), actualPatients.getFirst()
                                                                .toString());
     }
 
@@ -124,14 +143,49 @@ public class FacilityTester {
     // Small facility tests -------------------------------------------------------------------------
 
     @Test
-    public void testSmallGetRecentPatients() {
-        ArrayList<CurrentPatient> actual = this.smallFacility.getRecentPatients(new GregorianCalendar(2020, 0, 0));
-        assertEquals(2, actual.size());
+    public void testSmallLookupByUHID() {
+        CurrentPatient expected = new CurrentPatient("Blake", "Bird", this.uHID1, 1010101, this.date1);
+        CurrentPatient actual = this.smallFacility.lookupByUHID(this.uHID1);
+        assertEquals(expected.toString(), actual.toString());
     }
 
-    //TODO:
-    // Add more tests for small facility
+    @Test
+    public void testSmallLookupByPhysician() {
+        CurrentPatient expected = new CurrentPatient("John", "Fuller", this.uHID3, 9879876, this.date3);
+        ArrayList<CurrentPatient> actual = this.smallFacility.lookupByPhysician(9879876);
+        assertEquals(expected.toString(), actual.getFirst()
+                                                .toString());
+    }
 
+    @Test
+    public void testSmallSetVisit() {
+        this.smallFacility.lookupByUHID(this.uHID1)
+                          .updateLastVisit(this.date4);
+        CurrentPatient actual = this.smallFacility.lookupByUHID(this.uHID1);
+        assertEquals(this.date4.toString(), actual.getLastVisit()
+                                                  .toString());
+    }
+
+    @Test
+    public void testSmallSetPhysician() {
+        this.smallFacility.lookupByUHID(this.uHID1)
+                          .updatePhysician(9879876);
+        CurrentPatient actual = this.smallFacility.lookupByUHID(this.uHID1);
+        assertEquals(9879876, actual.getPhysician());
+    }
+
+    @Test
+    public void testSmallGetRecentPatients() {
+        ArrayList<CurrentPatient> actual = this.smallFacility.getRecentPatients(this.date5);
+        assertEquals(6, actual.size());
+    }
+
+    @Test
+    public void testSmallGetPhysicianList() {
+        ArrayList<Integer> actual = this.smallFacility.getPhysicianList();
+        System.out.println(actual);
+        assertEquals(20, actual.size());
+    }
 
     // Helper methods ------------------------------------------------------------
 

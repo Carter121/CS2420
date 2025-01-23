@@ -40,7 +40,7 @@ public class CurrentPatientGeneric<Type> extends Patient {
      * @return the Gregorian Calendar date of the last visit
      */
     public GregorianCalendar getLastVisit() {
-        return null;
+        return this.lastVisit;
     }
 
     /**

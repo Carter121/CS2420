@@ -3,12 +3,12 @@ package assign02;
 import java.util.Comparator;
 
 /**
- * Comparator that defines an ordering among current patients using their first name, last name, and uHealthIDs.
+ * Comparator that defines an ordering among current patients using the date of their last visit and their uHealthIDs.
  *
  * @author CS 2420 course staff, Carter Carling, and Nathan Montoya
  * @version January 16, 2025
  */
-public class OrderByName<Type> implements Comparator<CurrentPatientGeneric<Type>> {
+public class OrderByDate<Type> implements Comparator<CurrentPatientGeneric<Type>> {
 
     /**
      * Returns a negative value if lhs (left-hand side) is less than rhs (right-hand side).
@@ -17,26 +17,16 @@ public class OrderByName<Type> implements Comparator<CurrentPatientGeneric<Type>
      */
     public int compare(CurrentPatientGeneric<Type> lhs, CurrentPatientGeneric<Type> rhs) {
 
-        if (!lhs.getFirstName()
-                .equals(rhs.getFirstName())) {
-
-            return lhs.getFirstName()
-                      .compareTo(rhs.getFirstName());
-
-        } else if (!lhs.getLastName()
-                       .equals(rhs.getLastName())) {
-
-            return lhs.getLastName()
-                      .compareTo(rhs.getLastName());
-
+        if (!lhs.getLastVisit()
+                .equals(rhs.getLastVisit())) {
+            return lhs.getLastVisit()
+                      .compareTo(rhs.getLastVisit());
         } else {
-
             return lhs.getUHealthID()
                       .toString()
                       .compareTo(rhs.getUHealthID()
                                     .toString());
         }
-
 
     }
 

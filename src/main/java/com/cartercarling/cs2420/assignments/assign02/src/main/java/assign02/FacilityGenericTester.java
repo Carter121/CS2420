@@ -15,30 +15,44 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author CS 2420 course staff and, Carter Carling, and Nathan Montoya
  * @version 01/16/2024
  */
+@SuppressWarnings("MagicConstant")
 public class FacilityGenericTester {
 
     private FacilityGeneric<Integer> uIDFacility, emptyFacility, phase3Facility;
     private FacilityGeneric<UHealthID> uHIDFacility;
     private FacilityGeneric<String> nameFacility;
 
-    private UHealthID[] uHIDs;
-    private GregorianCalendar[] dates;
-    private String[] firstNames, lastNames, physicianNames;
+    private UHealthID[] uHIDs, uHIDsBig;
+    private GregorianCalendar[] dates, datesBig;
+    private String[] uIDFirstNames, uIDLastNames, uIDPhysicianNames, BigFirstNames, BigLastNames, BigPhysicianNames;
     // For phase 3
     private UHealthID p3id1, p3id2, p3id3, p3id4;
     private GregorianCalendar p3date1, p3date2, p3date3, p3date4;
 
+    // For BigFacility
+    private FacilityGeneric<Integer> uIDBigFacility, emptyBigFacility, BigFacility;
+    private FacilityGeneric<UHealthID> uHIDBigFacility;
+    private FacilityGeneric<String> nameBigFacility;
+
+    private UHealthID bfid1, bfid2, bfid3, bfid4, bfid5, bfid6, bfid7, bfid8, bfid9, bfid10, bfid11, bfid12, bfid13, bfid14, bfid15;
+    private GregorianCalendar bfdate1, bfdate2, bfdate3, bfdate4, bfdate5, bfdate7, bfdate8, bfdate9, bfdate10, bfdate11, bfdate12, bfdate13, bfdate14, bfdate15;
+
     @BeforeEach
     public void setUp() throws Exception {
+
+        //***********************************************************************
+        //* Original Test Stuff
+        //***********************************************************************
+
         // Modifying these numbers will affect the provided tests
         int nPatients = 20;
         int nPhysicians = 8;
 
         this.uHIDs = this.generateUHIDs(nPatients + nPhysicians);
         this.dates = this.generateDates(nPatients);
-        this.firstNames = this.generateNames(nPatients);
-        this.lastNames = this.generateNames(nPatients);
-        this.physicianNames = this.generateNames(nPhysicians);
+        this.uIDFirstNames = this.generateNames(nPatients);
+        this.uIDLastNames = this.generateNames(nPatients);
+        this.uIDPhysicianNames = this.generateNames(nPhysicians);
 
         this.uIDFacility = new FacilityGeneric<Integer>();
         this.uHIDFacility = new FacilityGeneric<UHealthID>();
@@ -48,16 +62,15 @@ public class FacilityGenericTester {
 
         for (int i = 0; i < nPatients; i++) {
             this.uIDFacility.addPatient(new CurrentPatientGeneric<Integer>(
-                    this.firstNames[i], this.lastNames[i],
+                    this.uIDFirstNames[i], this.uIDLastNames[i],
                     this.uHIDs[i], 1234567 + i % nPhysicians, this.dates[i]));
             this.uHIDFacility.addPatient(new CurrentPatientGeneric<UHealthID>(
-                    this.firstNames[i], this.lastNames[i],
+                    this.uIDFirstNames[i], this.uIDLastNames[i],
                     this.uHIDs[i], this.uHIDs[nPatients + i % nPhysicians], this.dates[i]));
             this.nameFacility.addPatient(new CurrentPatientGeneric<String>(
-                    this.firstNames[i], this.lastNames[i],
-                    this.uHIDs[i], this.physicianNames[i % nPhysicians], this.dates[i]));
+                    this.uIDFirstNames[i], this.uIDLastNames[i],
+                    this.uHIDs[i], this.uIDPhysicianNames[i % nPhysicians], this.dates[i]));
         }
-
         this.p3id1 = new UHealthID("XXXX-1111");
         this.p3id2 = new UHealthID("BBBB-1111");
         this.p3id3 = new UHealthID("FFFF-1111");
@@ -72,13 +85,55 @@ public class FacilityGenericTester {
         this.phase3Facility.addPatient(new CurrentPatientGeneric<Integer>("A", "C", new UHealthID("FFFF-1111"), 7, new GregorianCalendar(2019, 1, 3)));
         this.phase3Facility.addPatient(new CurrentPatientGeneric<Integer>("R", "T", new UHealthID("BBBB-2222"), 7, new GregorianCalendar(2019, 1, 2)));
 
-        // Extend this tester to add more tests for the facilities above,
-        // as well as to create and test other facilities.
-        // (HINT: For a larger facility, use the helpers at the end of this file to
-        //        generate names, IDs, and dates.)
+        //***********************************************************************
+        //* Big Facility
+        //***********************************************************************
+
+
+        //* Create the facilities
+        this.uIDBigFacility = new FacilityGeneric<Integer>();
+        this.uHIDBigFacility = new FacilityGeneric<UHealthID>();
+        this.nameBigFacility = new FacilityGeneric<String>();
+        this.emptyBigFacility = new FacilityGeneric<Integer>();
+        this.BigFacility = new FacilityGeneric<Integer>();
+
+        //* Create the patient data
+        nPatients = 100;
+        nPhysicians = 100;
+        this.uHIDsBig = this.generateUHIDs(nPatients + nPhysicians);
+        this.datesBig = this.generateDates(nPatients);
+        this.BigFirstNames = this.generateNames(nPatients);
+        this.BigLastNames = this.generateNames(nPatients);
+        this.BigPhysicianNames = this.generateNames(nPhysicians);
+
+        //* Add the patients to the facilities
+        for (int i = 0; i < nPatients; i++) {
+            this.uIDBigFacility.addPatient(new CurrentPatientGeneric<Integer>(
+                    this.BigFirstNames[i], this.BigLastNames[i],
+                    this.uHIDsBig[i], 1234567 + i, this.datesBig[i]));
+
+            this.uHIDBigFacility.addPatient(new CurrentPatientGeneric<UHealthID>(
+                    this.BigFirstNames[i], this.BigLastNames[i],
+                    this.uHIDsBig[i], this.uHIDsBig[nPatients + i], this.datesBig[i]));
+
+            this.nameBigFacility.addPatient(new CurrentPatientGeneric<String>(
+                    this.BigFirstNames[i], this.BigLastNames[i],
+                    this.uHIDsBig[i], this.BigPhysicianNames[i], this.datesBig[i]));
+        }
+
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("A", "B", new UHealthID("XXXX-1111"), 7, new GregorianCalendar(2019, 1, 5)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("A", "B", new UHealthID("BBBB-1111"), 7, new GregorianCalendar(2019, 1, 4)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("A", "C", new UHealthID("FFFF-1111"), 7, new GregorianCalendar(2019, 1, 3)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("R", "T", new UHealthID("BBBB-2222"), 7, new GregorianCalendar(2019, 1, 2)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("K", "C", new UHealthID("CCCC-1234"), 7, new GregorianCalendar(2019, 1, 1)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("C", "C", new UHealthID("DDDD-5678"), 7, new GregorianCalendar(2018, 11, 31)));
+        this.BigFacility.addPatient(new CurrentPatientGeneric<Integer>("J", "K", new UHealthID("EEEE-1011"), 7, new GregorianCalendar(2018, 11, 30)));
+
     }
 
-    // empty Facility tests --------------------------------------------------------
+    //***********************************************************************
+    //* empty Facility tests
+    //***********************************************************************
 
     @Test
     public void testEmptyLookupUHID() {
@@ -109,7 +164,9 @@ public class FacilityGenericTester {
         assertEquals(0, patients.size());
     }
 
-    // uID Facility tests --------------------------------------------------------
+    //***********************************************************************
+    //* uID Facility tests
+    //***********************************************************************
 
     @Test
     public void testUIDLookupPhysicianCount() {
@@ -119,15 +176,22 @@ public class FacilityGenericTester {
 
     @Test
     public void testUIDLookupPhysicianPatient() {
-        Patient expectedPatient = new Patient(this.firstNames[1], this.lastNames[1], new UHealthID(this.uHIDs[1].toString()));
-        ArrayList<CurrentPatientGeneric<Integer>> actualPatients = this.uIDFacility.lookupByPhysician(1234568);
+        int expectedPhysician = 1234568;
+        CurrentPatientGeneric<Integer> expectedPatient = new CurrentPatientGeneric<>(this.uIDFirstNames[1], this.uIDLastNames[1], new UHealthID(this.uHIDs[1].toString()), expectedPhysician, this.dates[1]);
+        ArrayList<CurrentPatientGeneric<Integer>> actualPatients = this.uIDFacility.lookupByPhysician(expectedPhysician);
         assertEquals(expectedPatient.toString(), actualPatients.get(0)
                                                                .toString());
     }
 
-    // Add more tests
+    @Test
+    public void testUIDLookupPhysicianCountBiggerArray() {
+        ArrayList<CurrentPatientGeneric<Integer>> actualPatients = this.uIDFacility.lookupByPhysician(12345678);
+        assertEquals(0, 0);
+    }
 
-    // UHealthID facility tests ---------------------------------------------------
+    //***********************************************************************
+    //* UHealthID facility tests
+    //***********************************************************************
 
     @Test
     public void testUHIDLookupPhysicianCount() {
@@ -142,16 +206,16 @@ public class FacilityGenericTester {
         assertEquals(this.uHIDs[this.uHIDs.length - 1], patient.getPhysician());
     }
 
-    // Add more tests
-
-    // name facility tests -------------------------------------------------------------------------
+    //***********************************************************************
+    //* name facility tests
+    //***********************************************************************
 
     @Test
     public void testNameLookupPhysician() {
-        Patient expectedPatient1 = new Patient(this.firstNames[1], this.lastNames[1], new UHealthID(this.uHIDs[1].toString()));
-        Patient expectedPatient2 = new Patient(this.firstNames[9], this.lastNames[9], new UHealthID(this.uHIDs[9].toString()));
+        Patient expectedPatient1 = new Patient(this.uIDFirstNames[1], this.uIDLastNames[1], new UHealthID(this.uHIDs[1].toString()));
+        Patient expectedPatient2 = new Patient(this.uIDFirstNames[9], this.uIDLastNames[9], new UHealthID(this.uHIDs[9].toString()));
 
-        ArrayList<CurrentPatientGeneric<String>> actualPatients = this.nameFacility.lookupByPhysician(this.physicianNames[1]);
+        ArrayList<CurrentPatientGeneric<String>> actualPatients = this.nameFacility.lookupByPhysician(this.uIDPhysicianNames[1]);
 
         boolean containsPt1 = false;
         boolean containsPt2 = false;
@@ -174,12 +238,6 @@ public class FacilityGenericTester {
         assertEquals(8, actual.size());
     }
 
-    // TODO:
-    // Add more tests
-
-    // phase 3 tests ---------------------------------------------------------------------------
-    // Uncomment these when you get to phase 3
-
     @Test
     public void testOrderedByUHIDCount() {
         ArrayList<CurrentPatientGeneric<Integer>> actual = this.phase3Facility.getOrderedPatients(new OrderByUHealthID<Integer>());
@@ -199,7 +257,150 @@ public class FacilityGenericTester {
                                                                                                                  .toString());
     }
 
-    // Add more tests
+    //***********************************************************************
+    //***********************************************************************
+    //***********************************************************************
+    //* Big Facility tests
+    //***********************************************************************
+    //***********************************************************************
+    //***********************************************************************
+
+    //* Test the uId big facility
+    @Test
+    public void testUIDBigPhysicianCount() {
+        ArrayList<Integer> physicianList = this.uIDBigFacility.getPhysicianList();
+        assertEquals(100, physicianList.size());
+    }
+
+    @Test
+    public void testUIDBigLookupByUHID() {
+        CurrentPatientGeneric<Integer> expected = new CurrentPatientGeneric<>(this.BigFirstNames[1], this.BigLastNames[1], new UHealthID(this.uHIDsBig[1].toString()), 1234567, this.datesBig[1]);
+        CurrentPatientGeneric<Integer> actual = this.uIDBigFacility.lookupByUHID(this.uHIDsBig[1]);
+        assertEquals(expected.toString(), actual.toString());
+    }
+
+    @Test
+    public void testUIDBigLookupByPhysician() {
+        CurrentPatientGeneric<Integer> expected = new CurrentPatientGeneric<>(this.BigFirstNames[0], this.BigLastNames[0], new UHealthID(this.uHIDsBig[0].toString()), 1234567, this.datesBig[0]);
+        ArrayList<CurrentPatientGeneric<Integer>> actualPatients = this.uIDBigFacility.lookupByPhysician(1234567);
+        assertEquals(expected.toString(), actualPatients.getFirst()
+                                                        .toString());
+    }
+
+    @Test
+    public void testUIDBigSetVisit() {
+        this.uIDBigFacility.lookupByUHID(this.uHIDsBig[0])
+                           .updateLastVisit(this.datesBig[1]);
+
+        CurrentPatientGeneric<Integer> actual = this.uIDBigFacility.lookupByUHID(this.uHIDsBig[1]);
+
+        assertEquals(this.datesBig[1].toString(), actual.getLastVisit()
+                                                        .toString());
+    }
+
+    @Test
+    public void testUIDBigSetPhysician() {
+        this.uIDBigFacility.lookupByUHID(this.uHIDsBig[0])
+                           .updatePhysician(1234567);
+        CurrentPatientGeneric<Integer> actual = this.uIDBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(1234567, actual.getPhysician());
+    }
+
+    @Test
+    public void testUIDBigGetRecentPatients() {
+        ArrayList<CurrentPatientGeneric<Integer>> actual = this.uIDBigFacility.getRecentPatients(this.datesBig[4]);
+        assertEquals(77, actual.size());
+    }
+
+    //* Test the uHealthID big facility
+    @Test
+    public void testUHIDBigPhysicianCount() {
+        ArrayList<UHealthID> physicianList = this.uHIDBigFacility.getPhysicianList();
+        assertEquals(100, physicianList.size());
+    }
+
+    @Test
+    public void testUHIDBigLookupByUHID() {
+        CurrentPatientGeneric<UHealthID> expected = new CurrentPatientGeneric<>(this.BigFirstNames[0], this.BigLastNames[0], new UHealthID(this.uHIDsBig[0].toString()), this.uHIDsBig[0], this.datesBig[0]);
+        CurrentPatientGeneric<UHealthID> actual = this.uHIDBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(expected.toString(), actual.toString());
+    }
+
+    @Test
+    public void testUHIDBigLookupByPhysician() {
+        CurrentPatientGeneric<UHealthID> expected = new CurrentPatientGeneric<>(this.BigFirstNames[0], this.BigLastNames[0], new UHealthID(this.uHIDsBig[0].toString()), this.uHIDsBig[0], this.datesBig[0]);
+        ArrayList<CurrentPatientGeneric<UHealthID>> actualPatients = this.uHIDBigFacility.lookupByPhysician(this.uHIDsBig[100]);
+        assertEquals(expected.toString(), actualPatients.getFirst()
+                                                        .toString());
+    }
+
+    @Test
+    public void testUHIDBigSetVisit() {
+        this.uHIDBigFacility.lookupByUHID(this.uHIDsBig[0])
+                            .updateLastVisit(this.datesBig[1]);
+        CurrentPatientGeneric<UHealthID> actual = this.uHIDBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(this.datesBig[1].toString(), actual.getLastVisit()
+                                                        .toString());
+    }
+
+    @Test
+    public void testUHIDBigSetPhysician() {
+        this.uHIDBigFacility.lookupByUHID(this.uHIDsBig[0])
+                            .updatePhysician(this.uHIDsBig[0]);
+        CurrentPatientGeneric<UHealthID> actual = this.uHIDBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(this.uHIDsBig[0], actual.getPhysician());
+    }
+
+    @Test
+    public void testUHIDBigGetRecentPatients() {
+        ArrayList<CurrentPatientGeneric<UHealthID>> actual = this.uHIDBigFacility.getRecentPatients(this.datesBig[4]);
+        assertEquals(77, actual.size());
+    }
+
+    //* test the name big facility
+    @Test
+    public void testNameBigPhysicianCount() {
+        ArrayList<String> physicianList = this.nameBigFacility.getPhysicianList();
+        assertEquals(100, physicianList.size());
+    }
+
+    @Test
+    public void testNameBigLookupByUHID() {
+        CurrentPatientGeneric<String> expected = new CurrentPatientGeneric<>(this.BigFirstNames[0], this.BigLastNames[0], new UHealthID(this.uHIDsBig[0].toString()), this.BigPhysicianNames[0], this.datesBig[0]);
+        CurrentPatientGeneric<String> actual = this.nameBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(expected.toString(), actual.toString());
+    }
+
+    @Test
+    public void testNameBigLookupByPhysician() {
+        CurrentPatientGeneric<String> expected = new CurrentPatientGeneric<>(this.BigFirstNames[0], this.BigLastNames[0], new UHealthID(this.uHIDsBig[0].toString()), this.BigPhysicianNames[0], this.datesBig[0]);
+        ArrayList<CurrentPatientGeneric<String>> actualPatients = this.nameBigFacility.lookupByPhysician(this.BigPhysicianNames[0]);
+        assertEquals(expected.toString(), actualPatients.getFirst()
+                                                        .toString());
+    }
+
+    @Test
+    public void testNameBigSetVisit() {
+        this.nameBigFacility.lookupByUHID(this.uHIDsBig[0])
+                            .updateLastVisit(this.datesBig[1]);
+        CurrentPatientGeneric<String> actual = this.nameBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(this.datesBig[1].toString(), actual.getLastVisit()
+                                                        .toString());
+    }
+
+    @Test
+    public void testNameBigSetPhysician() {
+        this.nameBigFacility.lookupByUHID(this.uHIDsBig[0])
+                            .updatePhysician(this.BigPhysicianNames[0]);
+        CurrentPatientGeneric<String> actual = this.nameBigFacility.lookupByUHID(this.uHIDsBig[0]);
+        assertEquals(this.BigPhysicianNames[0], actual.getPhysician());
+    }
+
+    @Test
+    public void testNameBigGetRecentPatients() {
+        ArrayList<CurrentPatientGeneric<String>> actual = this.nameBigFacility.getRecentPatients(this.datesBig[4]);
+        assertEquals(77, actual.size());
+    }
 
     // Private helper methods ---------------------------------------------------------------
 

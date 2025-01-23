@@ -18,6 +18,7 @@
     <modules>
         <module>src/main/java/com/cartercarling/cs2420/assignments</module>
         <module>src/main/java/com/cartercarling/cs2420/labs</module>
+        <module>src/main/java/com/cartercarling/cs2420/labs/lab02</module>
     </modules>
 
     <dependencies>

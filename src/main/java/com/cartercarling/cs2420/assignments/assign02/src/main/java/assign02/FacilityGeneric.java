@@ -46,6 +46,7 @@ public class FacilityGeneric<Type> {
             list.set(minIndex, temp);
         }
     }
+    
     /**
      * Adds the given patient to the list of patients, avoiding duplicates.
      *
