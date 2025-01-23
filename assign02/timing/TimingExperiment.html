@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2025-01-23">
-<meta name="description" content="declaration: package: timing, class: TimingExperiment">
+<meta name="description" content="declaration: package: assign02.timing, class: TimingExperiment">
 <meta name="generator" content="javadoc/ClassWriter">
-<link rel="stylesheet" type="text/css" href="../resource-files/jquery-ui.min.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../resource-files/betterjdocs.css" title="Style">
-<script type="text/javascript" src="../script-files/script.js"></script>
-<script type="text/javascript" src="../script-files/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="../script-files/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../resource-files/jquery-ui.min.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../resource-files/betterjdocs.css" title="Style">
+<script type="text/javascript" src="../../script-files/script.js"></script>
+<script type="text/javascript" src="../../script-files/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="../../script-files/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">const pathtoroot = "../";
+<script type="text/javascript">const pathtoroot = "../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -28,19 +28,19 @@ loadScripts(document, 'script');</script>
 <div class="nav-menu-button"><button id="navbar-toggle-button" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation links"><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span></button></div>
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
-<li><a href="../index.html">Overview</a></li>
+<li><a href="../../index.html">Overview</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="class-use/TimingExperiment.html">Use</a></li>
 <li><a href="package-tree.html">Tree</a></li>
-<li><a href="../index-all.html">Index</a></li>
-<li><a href="../search.html">Search</a></li>
+<li><a href="../../index-all.html">Index</a></li>
+<li><a href="../../search.html">Search</a></li>
 </ul>
 </div>
 </div>
 <div class="sub-nav">
 <div class="nav-content">
 <ol class="sub-nav-list">
-<li><a href="package-summary.html">timing</a></li>
+<li><a href="package-summary.html">assign02.timing</a></li>
 <li><a href="TimingExperiment.html" class="current-selection">TimingExperiment</a></li>
 </ol>
 <div class="nav-list-search">
@@ -71,6 +71,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#problemSizeCount" tabindex="0">problemSizeCount</a></li>
 <li><a href="#problemSizeStep" tabindex="0">problemSizeStep</a></li>
 <li><a href="#experimentIterationCount" tabindex="0">experimentIterationCount</a></li>
+<li><a href="#results" tabindex="0">results</a></li>
 </ol>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
@@ -80,7 +81,8 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#printResults()" tabindex="0">printResults()</a></li>
+<li><a href="#printResults(boolean)" tabindex="0">printResults(boolean)</a></li>
+<li><a href="#calculateResults()" tabindex="0">calculateResults()</a></li>
 <li><a href="#computeMedianElapsedTime(int)" tabindex="0">computeMedianElapsedTime(int)</a></li>
 <li><a href="#computeElapsedTime(int)" tabindex="0">computeElapsedTime(int)</a></li>
 <li><a href="#setupExperiment(int)" tabindex="0">setupExperiment(int)</a></li>
@@ -95,13 +97,13 @@ loadScripts(document, 'script');</script>
 <h1 title="Class TimingExperiment" class="title">Class TimingExperiment</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">timing.TimingExperiment</div>
+<div class="inheritance">assign02.timing.TimingExperiment</div>
 </div>
 <section class="class-description" id="class-description">
 <div class="horizontal-scroll">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../lab02/ArrayMaximumTimingExperimentV2.html" title="class in lab02">ArrayMaximumTimingExperimentV2</a></code></dd>
+<dd><code><a href="FacilityLookupTimingExperiment.html" title="class in assign02.timing">FacilityLookupTimingExperiment</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">TimingExperiment</span>
@@ -135,6 +137,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected int</code></div>
 <div class="col-second even-row-color"><code><a href="#problemSizeStep" class="member-name-link">problemSizeStep</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private final <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#results" class="member-name-link">results</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -168,31 +173,34 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#computeElapsedTime(int)" class="member-name-link">computeElapsedTime</a><wbr>(int&nbsp;problemSize)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Computes the time elapsed to run the computation once for a given problem
- size.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected long</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#computeMedianElapsedTime(int)" class="member-name-link">computeMedianElapsedTime</a><wbr>(int&nbsp;problemSize)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Computes the median time elapsed to run the computation for a given problem
- size.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printResults()" class="member-name-link">printResults</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateResults()" class="member-name-link">calculateResults</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs the timing experiment and prints the results.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#runComputation()" class="member-name-link">runComputation</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#computeElapsedTime(int)" class="member-name-link">computeElapsedTime</a><wbr>(int&nbsp;problemSize)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Computes the time elapsed to run the computation once for a given problem
+ size.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#computeMedianElapsedTime(int)" class="member-name-link">computeMedianElapsedTime</a><wbr>(int&nbsp;problemSize)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Computes the median time elapsed to run the computation for a given problem
+ size.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#printResults(boolean)" class="member-name-link">printResults</a><wbr>(boolean&nbsp;last)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#runComputation()" class="member-name-link">runComputation</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Abstract method to run the computation to be timed.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setupExperiment(int)" class="member-name-link">setupExperiment</a><wbr>(int&nbsp;problemSize)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setupExperiment(int)" class="member-name-link">setupExperiment</a><wbr>(int&nbsp;problemSize)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Abstract method for setting up the infrastructure for the experiment for a
  given problem size.</div>
 </div>
@@ -253,6 +261,14 @@ loadScripts(document, 'script');</script>
 </div>
 </section>
 </li>
+<li>
+<section class="detail" id="results">
+<h3>results</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name">results</span></div>
+</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -291,10 +307,18 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="printResults()">
+<section class="detail" id="printResults(boolean)">
 <h3>printResults</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printResults</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printResults</span><wbr><span class="parameters">(boolean&nbsp;last)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="calculateResults()">
+<h3>calculateResults</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">calculateResults</span>()</div>
 <div class="block">Runs the timing experiment and prints the results.</div>
 </div>
 </section>
