@@ -32,7 +32,7 @@ public class FacilityLookupTimingExperiment extends TimingExperiment {
         TimingExperiment timingExperiment = new FacilityLookupTimingExperiment();
 
         System.out.println("\n---Computing timing results---\n");
-        timingExperiment.calculateResults();
+        timingExperiment.printResults();
     }
 
     public FacilityLookupTimingExperiment() {

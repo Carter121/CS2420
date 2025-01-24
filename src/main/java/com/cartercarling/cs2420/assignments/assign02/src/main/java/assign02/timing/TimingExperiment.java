@@ -40,34 +40,17 @@ public abstract class TimingExperiment {
         this.results = new HashMap<>();
     }
 
-    public void printResults(boolean last) {
-        System.out.flush();
-        System.out.println("===========================================");
-        if (last)
-            System.out.println("Not done yet... Please wait...");
-        else
-            System.out.println("!!! Complete !!!");
-        System.out.println("===========================================");
-        System.out.println(this.problemSizeDescription + "\ttime (ns)");
-        this.results.forEach((pt, ns) -> {
-            System.out.println(pt + "\t" + ns);
-        });
-    }
-
     /**
      * Runs the timing experiment and prints the results.
      */
-    public void calculateResults() {
+    public void printResults() {
+        System.out.println(this.problemSizeDescription + "\ttime (ns)");
         int size = this.problemSizeMin;
         for (int i = 0; i < this.problemSizeCount; i++) {
             long medianElapsedTime = this.computeMedianElapsedTime(size);
-            this.results.put(size, medianElapsedTime);
+            System.out.println(size + "\t" + medianElapsedTime);
             size += this.problemSizeStep;
-
-            if (i % 10 == 0)
-                this.printResults(true);
         }
-        this.printResults(true);
     }
 
     /**
