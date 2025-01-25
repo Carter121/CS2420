@@ -14,7 +14,7 @@ import java.util.Random;
 public class GenerateID {
 
     private final static int numOfIDs = 250_000;
-    public final static String outputDirectory = "/home/carter/Dev/CS2420/src/main/java/com/cartercarling/cs2420/assignments/assign02/src/main/java/assign02/timing";
+    public final static String outputDirectory = "src/main/java/com/cartercarling/cs2420/assignments/assign02/src/main/java/assign02/timing";
     private final static Random rng = new Random();
 
     public static void main(String[] args) {
