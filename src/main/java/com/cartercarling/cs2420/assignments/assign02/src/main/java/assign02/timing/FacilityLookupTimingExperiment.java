@@ -21,9 +21,9 @@ import java.util.Random;
 public class FacilityLookupTimingExperiment extends TimingExperiment {
 
     private static final String problemSizeDescription = "# Pt";  // TODO: fill in string appropriately
-    private static final int problemSizeMin = 500;  // TODO: initialize appropriately (do not use 0)
-    private static final int problemSizeCount = 20;  // TODO: initialize appropriately (do not use 0)
-    private static final int problemSizeStep = 500;  // TODO: initialize appropriately (do not use 0)
+    private static final int problemSizeMin = 250;  // TODO: initialize appropriately (do not use 0)
+    private static final int problemSizeCount = 100;  // TODO: initialize appropriately (do not use 0)
+    private static final int problemSizeStep = 250;  // TODO: initialize appropriately (do not use 0)
     private static final int experimentIterationCount = 50;
 
     private UHealthID[] uHIDs;
