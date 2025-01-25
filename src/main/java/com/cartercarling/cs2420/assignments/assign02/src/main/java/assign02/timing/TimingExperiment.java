@@ -1,7 +1,6 @@
 package assign02.timing;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 /**
  * Abstract base class for running timing experiments.
@@ -19,8 +18,6 @@ public abstract class TimingExperiment {
     protected int problemSizeStep;
     protected int experimentIterationCount;
 
-    private final HashMap<Integer, Long> results;
-
     /**
      * Constructs a general timing experiment.
      *
@@ -37,18 +34,17 @@ public abstract class TimingExperiment {
         this.problemSizeCount = problemSizeCount;
         this.problemSizeStep = problemSizeStep;
         this.experimentIterationCount = experimentIterationCount;
-        this.results = new HashMap<>();
     }
 
     /**
      * Runs the timing experiment and prints the results.
      */
     public void printResults() {
-        System.out.println(this.problemSizeDescription + "\ttime (ns)");
+        System.out.println("# of " + this.problemSizeCount + "\t" + this.problemSizeDescription + "\ttime (ns)");
         int size = this.problemSizeMin;
         for (int i = 0; i < this.problemSizeCount; i++) {
             long medianElapsedTime = this.computeMedianElapsedTime(size);
-            System.out.println(size + "\t" + medianElapsedTime);
+            System.out.println(i + 1 + ".\t" + size + "\t" + medianElapsedTime);
             size += this.problemSizeStep;
         }
     }
@@ -63,7 +59,7 @@ public abstract class TimingExperiment {
     protected long computeMedianElapsedTime(int problemSize) {
         long[] elapsedTimes = new long[this.experimentIterationCount];
         for (int i = 0; i < this.experimentIterationCount; i++) {
-            elapsedTimes[i] = this.computeElapsedTime(problemSize);
+            elapsedTimes[i] = this.computeElapsedTime(problemSize, i);
         }
         Arrays.sort(elapsedTimes);
         return elapsedTimes[this.experimentIterationCount / 2];
@@ -76,8 +72,8 @@ public abstract class TimingExperiment {
      * @param problemSize - the problem size for one experiment
      * @return the time elapsed
      */
-    protected long computeElapsedTime(int problemSize) {
-        this.setupExperiment(problemSize);
+    protected long computeElapsedTime(int problemSize, int experimentIteration) {
+        this.setupExperiment(problemSize, experimentIteration);
         long startTime = System.nanoTime();
         this.runComputation();
         long endTime = System.nanoTime();
@@ -90,7 +86,7 @@ public abstract class TimingExperiment {
      *
      * @param problemSize - the problem size for one experiment
      */
-    protected abstract void setupExperiment(int problemSize);
+    protected abstract void setupExperiment(int problemSize, int experimentIteration);
 
     /**
      * Abstract method to run the computation to be timed.
